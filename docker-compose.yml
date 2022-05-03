@@ -1,0 +1,42 @@
+version: "3.4"
+
+services:
+  gocord:
+    container_name: "gocord"
+    restart: unless-stopped
+    build: ./
+    command:
+      - "air"
+    user: ${USER_ID:-1000}:${GROUP_ID:-1000}
+    volumes:
+      - ./:/usr/app:rw,cached
+    ports:
+      - 3000:80
+
+  caddy-gocord:
+    container_name: "caddy-gocord"
+    image: caddy:2
+    depends_on:
+      - golang
+    environment:
+      SERVER_NAME: ${SERVER_NAME:-localhost}
+    restart: unless-stopped
+    volumes:
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./tmp/caddy/pki:/data/caddy/pki
+      - caddy_data:/data
+      - caddy_config:/config
+    ports:
+      - target: 80
+        published: ${HTTP_PORT:-80}
+        protocol: tcp
+      - target: 443
+        published: ${HTTPS_PORT:-443}
+        protocol: tcp
+      - target: 443
+        published: ${HTTP3_PORT:-443}
+        protocol: udp
+
+volumes:
+  caddy_data:
+  caddy_config:
