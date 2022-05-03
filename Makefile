@@ -7,14 +7,13 @@ group := $(shell id -g)
 ifeq ($(isDocker), 1)
     ifeq ($(isContainerRunning), 1)
         dc := USER_ID=$(user) GROUP_ID=$(group) docker-compose
-        ge := docker exec -u $(user):$(group) go
         gr := docker exec -u $(user):$(group) go run
     else
         dc := USER_ID=$(user) GROUP_ID=$(group) docker-compose
-        ge :=
+        gr := go
     endif
 else
-    ge :=
+    gr := go run
 endif
 
 build-docker:
@@ -28,4 +27,4 @@ stop:
 	$(dc) stop
 
 main:
-	$(gr) main.go
+	$(gr) cmd/main.go
