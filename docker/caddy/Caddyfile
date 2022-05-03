@@ -1,0 +1,19 @@
+{
+    # email {env.EMAIL_LETSENCRYPT}
+
+    # Debug
+    {$DEBUG}
+    # HTTP/3 support
+    servers {
+        protocol {
+            experimental_http3
+        }
+    }
+}
+
+{$SERVER_NAME}
+
+reverse_proxy golang:3000
+
+log
+
