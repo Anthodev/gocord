@@ -40,12 +40,10 @@ RUN cp -af /root/.oh-my-zsh /home/${USERNAME}/ && \
 # Setup shell
 USER $USERNAME
 
-#RUN echo alias air='$(go env GOPATH)/bin/air' >> ~/.zshrc
-
 WORKDIR /usr/app
 
 COPY . .
 
 RUN go install github.com/cosmtrek/air@v1.29.0
 
-CMD ["air"]
+#CMD ["air"]
