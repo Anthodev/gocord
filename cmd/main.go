@@ -1,9 +1,7 @@
 package main
 
-import (
-	"github.com/anthodev/gocord/internal/api/client"
-)
+import "github.com/anthodev/gocord"
 
 func main() {
-	client.RunDiscordApi()
+	gocord.RunDiscordApi()
 }

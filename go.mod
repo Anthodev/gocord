@@ -2,7 +2,7 @@ module github.com/anthodev/gocord
 
 go 1.18
 
-require github.com/bwmarrin/discordgo v0.25.1-0.20220506203013-e1f154bfe70e
+require github.com/bwmarrin/discordgo v0.27.0
 
 require (
 	github.com/gorilla/websocket v1.4.2 // indirect
