@@ -27,4 +27,4 @@ stop:
 	$(dc) stop
 
 main:
-	$(gr) main.go
+	$(gr) cmd/main.go
